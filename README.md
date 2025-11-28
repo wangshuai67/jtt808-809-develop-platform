@@ -1,17 +1,17 @@
 # JTT808终端模拟器
 
 <div align="center">
-  <img src="./doc/logo.png" alt="JTT808终端模拟器" />
+  <img src="./img/logo.png" alt="基于JTT808-809协议的IoT开发测试平台" />
   
   [![Java](https://img.shields.io/badge/Java-8+-orange.svg)](https://www.oracle.com/java/)
-  [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-1.5.9-brightgreen.svg)](https://spring.io/projects/spring-boot)
+  [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.3-brightgreen.svg)](https://spring.io/projects/spring-boot)
   [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
   [![Build Status](https://img.shields.io/badge/Build-Passing-success.svg)]()
 </div>
 
 ## 📖 项目简介
 
-基于JTT808-809协议的Iot开发测试平台,包含808终端模拟，jtt809协议下级平台转发服务，用于测试和开发车联网平台，专为车联网平台的测试和开发而设计。通过模拟真实车辆的行驶轨迹、停留、报警触发等行为，帮助开发者进行部标服务器的压力测试和业务逻辑验证。
+基于JTT808-809协议的IoT开发测试平台,包含808终端模拟，jtt809协议下级平台转发服务，用于测试和开发车联网平台，专为车联网平台的测试和开发而设计。通过模拟真实车辆的行驶轨迹、停留、报警触发等行为，帮助开发者进行部标服务器的压力测试和业务逻辑验证。
 
 ### 🎯 核心特性
 
@@ -235,9 +235,21 @@ SIM卡号：13800138000
       数据分析
     </td>
     <td align="center">
-      <strong>13. 系统状态监控</strong><br>
+      <strong>13. 809报文界面</strong><br>
       <img src="./img/13.png" width="300px"><br>
       系统状态
+    </td>
+ <td align="center">
+      <strong>14. 线路管理</strong><br>
+      <img src="./img/router.png" width="300px"><br>
+      线路管理
+    </td>
+  </tr>
+ <tr>
+    <td align="center">
+      <strong>15. 批量创建模拟车辆</strong><br>
+      <img src="./img/createVehicle.png" width="300px"><br>
+      批量创建模拟车辆
     </td>
   </tr>
 </table>
