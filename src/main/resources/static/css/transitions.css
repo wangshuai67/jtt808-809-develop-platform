@@ -1,0 +1,348 @@
+/**
+ * 页面过渡效果样式
+ * 提供流畅的页面切换和元素过渡动画
+ */
+
+/* 页面加载状态 */
+body {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+body.page-loading {
+    opacity: 0.8;
+}
+
+body.page-loaded {
+    opacity: 1;
+}
+
+/* 页面切换过渡 */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.page-transition.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.page-transition .spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* 内容区域过渡 */
+.content-wrapper {
+    transition: all 0.3s ease-in-out;
+}
+
+.content-fade-in {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.content-fade-out {
+    animation: fadeOutDown 0.3s ease-in;
+}
+
+/* 卡片过渡效果 */
+.card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 按钮过渡效果 */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* 表格行过渡 */
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+    transform: scale(1.01);
+}
+
+/* 模态框过渡 */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translate(0, -50px);
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+}
+
+/* 侧边栏过渡 */
+.sidebar {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-collapsed .sidebar {
+    transform: translateX(-100%);
+}
+
+/* 导航过渡 */
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color, #007bff);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* 表单元素过渡 */
+.form-control {
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* 标签过渡 */
+.badge {
+    transition: all 0.2s ease;
+}
+
+.badge:hover {
+    transform: scale(1.1);
+}
+
+/* 图标过渡 */
+.icon {
+    transition: all 0.3s ease;
+}
+
+.icon:hover {
+    transform: rotate(360deg);
+}
+
+/* 进度条过渡 */
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+/* 折叠面板过渡 */
+.collapse {
+    transition: height 0.35s ease;
+}
+
+/* 工具提示过渡 */
+.tooltip {
+    transition: opacity 0.15s linear;
+}
+
+/* 弹出框过渡 */
+.popover {
+    transition: opacity 0.15s linear;
+}
+
+/* 下拉菜单过渡 */
+.dropdown-menu {
+    transition: all 0.15s ease-in-out;
+    transform: scale(0.95);
+    opacity: 0;
+}
+
+.dropdown-menu.show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* 警告框过渡 */
+.alert {
+    transition: all 0.3s ease;
+}
+
+.alert.fade {
+    opacity: 0;
+}
+
+.alert.show {
+    opacity: 1;
+}
+
+/* 页面元素渐入动画 */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 统计卡片动画 */
+.stats-card {
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card .stats-number {
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover .stats-number {
+    transform: scale(1.1);
+}
+
+/* 搜索框过渡 */
+.search-box {
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 数据表格过渡 */
+.data-table {
+    transition: all 0.3s ease;
+}
+
+.data-table.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* 地图容器过渡 */
+.map-container {
+    transition: all 0.3s ease;
+}
+
+.map-container.fullscreen {
+    transform: scale(1.02);
+}
+
+/* 信息面板过渡 */
+.info-panel {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.info-panel.collapsed {
+    transform: translateX(100%);
+}
+
+/* 日志面板过渡 */
+.log-panel {
+    transition: all 0.3s ease;
+}
+
+.log-panel.minimized {
+    transform: translateY(calc(100% - 40px));
+}
+
+/* 响应式过渡调整 */
+@media (max-width: 768px) {
+    .card:hover {
+        transform: none;
+    }
+    
+    .table tbody tr:hover {
+        transform: none;
+    }
+    
+    .stats-card:hover {
+        transform: none;
+    }
+}
+
+/* 减少动画偏好设置 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+    .btn::before {
+        background: rgba(0, 0, 0, 0.3);
+    }
+    
+    .nav-link::after {
+        height: 3px;
+    }
+}
+
+/* 深色模式过渡 */
+@media (prefers-color-scheme: dark) {
+    .table tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .btn::before {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}

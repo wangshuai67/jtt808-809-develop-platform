@@ -1,0 +1,27 @@
+package org.ssssssss.jtt809.common.packet;
+
+import org.ssssssss.jtt809.common.util.PropertiesUtil;
+import org.ssssssss.jtt809.common.util.constant.Const;
+
+/**
+ * 心跳包 数据体为空
+ */
+
+public class JT809Heartbeat extends JT809BasePacket {
+
+    public JT809Heartbeat() {
+        setMsgLength(getFixedByteLength());
+        setMsgSn(Const.getMsgSN());
+        setMsgId(Const.BusinessDataType.UP_LINKTEST_REQ);
+        setMsgGNSSCenterId(PropertiesUtil.getInteger("netty.server.centerId", 0));
+        setVersionFlag(new byte[]{1,0,0});
+        setEncryptFlag(Const.Encrypt.NO);
+        setEncryptKey(0);
+    }
+
+    @Override
+    public byte[] getMsgBodyByteArr() {
+        return new byte[0];
+    }
+
+}

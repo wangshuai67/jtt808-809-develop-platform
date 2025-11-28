@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JTT808-809车联网系统</title>
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="/static/js/bootstrap5.3.0.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/static/font-awesome/css/all.min.css" rel="stylesheet">
+    <!-- 自定义样式 -->
+    <link href="/static/css/v2/app.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- 加载中状态 -->
+        <div id="loading" class="loading-overlay">
+            <div class="loading-spinner">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">加载中...</span>
+                </div>
+                <p class="mt-2">系统初始化中...</p>
+            </div>
+        </div>
+
+        <!-- 主应用容器 -->
+        <div id="main-app" class="d-none">
+            <!-- 顶部标题栏 -->
+            <header class="top-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-link sidebar-toggle me-3" id="sidebarToggle">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <h4 class="mb-0 text-primary">
+                            <i class="fa fa-car me-2"></i>
+                            JTT808-809车联网系统
+                        </h4>
+                    </div>
+                    
+                    <div class="d-flex align-items-center">
+                        <!-- 面包屑导航 -->
+                        <nav aria-label="breadcrumb" class="me-4">
+                            <ol class="breadcrumb mb-0" id="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#" data-page="dashboard">首页</a></li>
+                            </ol>
+                        </nav>
+                        
+                        <!-- 用户菜单 -->
+                        <div class="dropdown">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fa fa-user me-1"></i>管理员
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#"><i class="fa fa-cog me-2"></i>系统设置</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/logout"><i class="fa fa-sign-out me-2"></i>退出登录</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 左侧导航栏 -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-content">
+                    <nav class="sidebar-nav">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" data-page="dashboard">
+                                    <i class="fa fa-dashboard me-2"></i>
+                                    <span>仪表板</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mt-3">
+                                <div class="text-muted small px-3">公共</div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-page="vehicles">
+                                    <i class="fa fa-car me-2"></i>
+                                    <span>车辆管理</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-page="routes">
+                                    <i class="fa fa-map me-2"></i>
+                                    <span>路线管理</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-page="monitor">
+                                    <i class="fa fa-eye me-2"></i>
+                                    <span>实时监控</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item mt-3">
+                                <div class="text-muted small px-3">808 功能</div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-page="gateways">
+                                    <i class="fa fa-server me-2"></i>
+                                    <span>808网关管理</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-page="tasks">
+                                    <i class="fa fa-tasks me-2"></i>
+                                    <span>808模拟终端任务</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-page="alerts">
+                                    <i class="fa fa-bell me-2"></i>
+                                    <span>808模拟终端警报</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-page="pressure">
+                                    <i class="fa fa-chart-line me-2"></i>
+                                    <span>808压测报表</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item mt-3">
+                                <div class="text-muted small px-3">809 功能</div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-page="809-gateways">
+                                    <i class="fa fa-network-wired me-2"></i>
+                                    <span>809网关配置</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-page="809-tasks">
+                                    <i class="fa fa-tasks me-2"></i>
+                                    <span>809转发任务管理</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-page="809-logs">
+                                    <i class="fa fa-file-alt me-2"></i>
+                                    <span>809报文日志管理</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- 主内容区域 -->
+            <main class="main-content">
+                <div class="container-fluid">
+                    <!-- 页面内容容器 -->
+                    <div id="page-content">
+                        <!-- 动态加载的页面内容 -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 通用模态框 -->
+    <div class="modal fade" id="commonModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commonModalTitle">标题</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="commonModalBody">
+                    <!-- 动态内容 -->
+                </div>
+                <div class="modal-footer" id="commonModalFooter">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="commonModalConfirm">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast 通知容器 -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer">
+        <!-- 动态生成的 Toast -->
+    </div>
+
+    <!-- JavaScript 依赖 -->
+    <script src="/static/js/jquery3.6.0.min.js"></script>
+    <script src="/static/js/bootstrap5.3.0.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="/static/js/chart.min.js"></script>
+    
+    <!-- 应用核心脚本 -->
+    <script src="/static/js/v2/core/app.js"></script>
+    <script src="/static/js/v2/core/router.js"></script>
+    <script src="/static/js/v2/core/api.js"></script>
+    <script src="/static/js/v2/core/utils.js"></script>
+    <script src="/static/js/v2/core/components.js"></script>
+    
+    <!-- 页面模块脚本 -->
+    <script src="/static/js/v2/pages/dashboard.js"></script>
+    <script src="/static/js/v2/pages/vehicles.js"></script>
+    <script src="/static/js/v2/pages/gateways.js"></script>
+    <script src="/static/js/v2/pages/routes.js"></script>
+    <script src="/static/js/v2/pages/tasks.js"></script>
+    <script src="/static/js/v2/pages/monitor.js"></script>
+    <script src="/static/js/v2/pages/settings.js"></script>
+    <script src="/static/js/v2/pages/pressure.js"></script>
+    <script src="/static/js/v2/pages/alerts.js"></script>
+    <script src="/static/js/v2/pages/809-gateways.js"></script>
+    <script src="/static/js/v2/pages/809-tasks.js"></script>
+    <script src="/static/js/v2/pages/809-logs.js"></script>
+
+    <script>
+        // 应用初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化应用
+            if (window.App) {
+                window.App.init();
+            } else {
+                console.error('App对象未找到');
+            }
+        });
+    </script>
+</body>
+</html>

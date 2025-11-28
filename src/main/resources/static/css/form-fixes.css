@@ -1,0 +1,247 @@
+/**
+ * 表单样式修复
+ * 确保表单控件尺寸协调，解决界面变小问题
+ */
+
+/* 重置表单基础样式 */
+.form-control,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+textarea,
+select {
+    min-height: 42px !important;
+    padding: 10px 16px !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 8px !important;
+    background-color: #ffffff !important;
+    transition: all 0.2s ease !important;
+    box-sizing: border-box !important;
+}
+
+/* 聚焦状态 */
+.form-control:focus,
+.form-select:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* 表单标签 */
+.form-label,
+label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+}
+
+/* 表单组 */
+.form-group,
+.mb-3,
+.row .col-md-6,
+.row .col-md-4,
+.row .col-md-12 {
+    margin-bottom: 20px !important;
+}
+
+/* 按钮样式修复 */
+.btn {
+    min-height: 42px !important;
+    padding: 10px 24px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+}
+
+.btn-primary {
+    background: #3b82f6 !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background: #2563eb !important;
+    transform: translateY(-1px) !important;
+}
+
+.btn-secondary {
+    background: #6b7280 !important;
+    color: white !important;
+}
+
+.btn-secondary:hover {
+    background: #4b5563 !important;
+}
+
+.btn-success {
+    background: #10b981 !important;
+    color: white !important;
+}
+
+.btn-success:hover {
+    background: #059669 !important;
+}
+
+.btn-danger {
+    background: #ef4444 !important;
+    color: white !important;
+}
+
+.btn-danger:hover {
+    background: #dc2626 !important;
+}
+
+.btn-warning {
+    background: #f59e0b !important;
+    color: white !important;
+}
+
+.btn-warning:hover {
+    background: #d97706 !important;
+}
+
+/* 卡片样式修复 */
+.card {
+    border: 1px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    background: white !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    margin-bottom: 24px !important;
+}
+
+.card-header {
+    padding: 20px 24px !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    background: #f9fafb !important;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.card-body {
+    padding: 24px !important;
+}
+
+.card-title {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #111827 !important;
+    margin: 0 !important;
+}
+
+/* 表格样式修复 */
+.table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    background: white !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.table th {
+    background: #f9fafb !important;
+    padding: 16px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    font-size: 14px !important;
+}
+
+.table td {
+    padding: 16px !important;
+    border-bottom: 1px solid #f3f4f6 !important;
+    color: #6b7280 !important;
+    font-size: 14px !important;
+}
+
+.table tbody tr:hover {
+    background: #f9fafb !important;
+}
+
+/* 响应式修复 */
+@media (max-width: 768px) {
+    .form-control,
+    .form-select,
+    input,
+    textarea,
+    select {
+        min-height: 44px !important;
+        font-size: 16px !important;
+    }
+    
+    .btn {
+        min-height: 44px !important;
+        font-size: 16px !important;
+    }
+}
+
+/* 确保主内容区域正确显示 */
+.main-content {
+    margin-left: 280px !important;
+    min-height: 100vh !important;
+    background: #f8fafc !important;
+}
+
+.content-wrapper {
+    padding: 24px !important;
+}
+
+/* 页面标题 */
+.page-title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    margin: 0 !important;
+}
+
+/* 顶部导航栏 */
+.top-navbar {
+    background: white !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    padding: 16px 24px !important;
+    height: auto !important;
+    min-height: 70px !important;
+}
+
+/* 修复可能的布局问题 */
+.row {
+    margin: 0 !important;
+}
+
+.col-md-6,
+.col-md-4,
+.col-md-12 {
+    padding: 0 12px !important;
+}
+
+/* 确保文本可读性 */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    color: #374151 !important;
+}
+
+/* 修复可能的z-index问题 */
+.modal {
+    z-index: 1050 !important;
+}
+
+.dropdown-menu {
+    z-index: 1000 !important;
+}

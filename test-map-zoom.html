@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地图缩放功能测试</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .map-test-area {
+            width: 100%;
+            height: 500px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            background: #f5f6fa;
+        }
+        
+        .controls {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .control-group {
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .control-group label {
+            display: inline-block;
+            width: 120px;
+            font-weight: bold;
+        }
+        
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #f8f9fa;
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* 模拟监控页面的CSS冲突测试 */
+        .overlay-test {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,0,0,0.1);
+            pointer-events: none; /* 测试是否影响地图交互 */
+            z-index: 1000;
+        }
+        
+        .loading-test {
+            pointer-events: none; /* 测试加载状态的指针事件 */
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>地图缩放功能测试</h1>
+        <p>测试百度地图的缩放、拖拽和其他交互功能</p>
+        
+        <div class="controls">
+            <h3>测试控制</h3>
+            <div class="control-group">
+                <label>地图状态:</label>
+                <span id="mapStatus">未初始化</span>
+            </div>
+            <div class="control-group">
+                <label>缩放级别:</label>
+                <span id="zoomLevel">-</span>
+            </div>
+            <div class="control-group">
+                <label>中心点:</label>
+                <span id="centerPoint">-</span>
+            </div>
+            <br>
+            <button id="initMapBtn">初始化地图</button>
+            <button id="testZoomBtn">测试缩放</button>
+            <button id="testDragBtn">测试拖拽</button>
+            <button id="addControlsBtn">添加控件</button>
+            <button id="toggleOverlayBtn">切换覆盖层</button>
+            <button id="toggleLoadingBtn">切换加载状态</button>
+            <button id="clearLogBtn">清空日志</button>
+        </div>
+        
+        <div id="mapContainer" class="map-test-area">
+            <div id="overlayTest" class="overlay-test" style="display: none;"></div>
+        </div>
+        
+        <div id="logContainer">
+            <h3>测试日志</h3>
+            <div id="testLog"></div>
+        </div>
+    </div>
+
+    <script>
+        class MapZoomTester {
+            constructor() {
+                this.map = null;
+                this.statusEl = document.getElementById('mapStatus');
+                this.zoomEl = document.getElementById('zoomLevel');
+                this.centerEl = document.getElementById('centerPoint');
+                this.logEl = document.getElementById('testLog');
+                this.overlayEl = document.getElementById('overlayTest');
+                this.containerEl = document.getElementById('mapContainer');
+                
+                this.initEventListeners();
+                this.log('测试页面加载完成', 'info');
+            }
+            
+            initEventListeners() {
+                document.getElementById('initMapBtn').addEventListener('click', () => this.initMap());
+                document.getElementById('testZoomBtn').addEventListener('click', () => this.testZoom());
+                document.getElementById('testDragBtn').addEventListener('click', () => this.testDrag());
+                document.getElementById('addControlsBtn').addEventListener('click', () => this.addControls());
+                document.getElementById('toggleOverlayBtn').addEventListener('click', () => this.toggleOverlay());
+                document.getElementById('toggleLoadingBtn').addEventListener('click', () => this.toggleLoading());
+                document.getElementById('clearLogBtn').addEventListener('click', () => this.clearLog());
+            }
+            
+            log(message, type = 'info') {
+                const timestamp = new Date().toLocaleTimeString();
+                const logEntry = document.createElement('div');
+                logEntry.className = `status ${type}`;
+                logEntry.textContent = `[${timestamp}] ${message}`;
+                this.logEl.appendChild(logEntry);
+                this.logEl.scrollTop = this.logEl.scrollHeight;
+            }
+            
+            clearLog() {
+                this.logEl.innerHTML = '';
+            }
+            
+            updateStatus(status) {
+                this.statusEl.textContent = status;
+                this.log(`地图状态: ${status}`, 'info');
+            }
+            
+            updateMapInfo() {
+                if (!this.map) return;
+                
+                try {
+                    const zoom = this.map.getZoom();
+                    const center = this.map.getCenter();
+                    this.zoomEl.textContent = zoom;
+                    this.centerEl.textContent = `${center.lng.toFixed(6)}, ${center.lat.toFixed(6)}`;
+                } catch (e) {
+                    this.log(`获取地图信息失败: ${e.message}`, 'error');
+                }
+            }
+            
+            async initMap() {
+                try {
+                    this.log('开始初始化地图...', 'info');
+                    
+                    // 检查BMap是否可用
+                    if (!window.BMap) {
+                        this.log('BMap未加载，尝试加载百度地图API...', 'warning');
+                        await this.loadBMapAPI();
+                    }
+                    
+                    // 创建地图实例
+                    this.map = new BMap.Map('mapContainer', {
+                        enableMapClick: true,
+                        enableAutoResize: true
+                    });
+                    
+                    // 设置中心点和缩放级别
+                    const center = new BMap.Point(116.404, 39.915); // 北京天安门
+                    this.map.centerAndZoom(center, 12);
+                    
+                    // 启用所有交互功能
+                    this.map.enableScrollWheelZoom(true);
+                    this.map.enableKeyboard();
+                    this.map.enableDragging();
+                    this.map.enableDoubleClickZoom();
+                    
+                    // 添加事件监听
+                    this.map.addEventListener('zoomend', () => {
+                        this.log(`缩放级别改变: ${this.map.getZoom()}`, 'success');
+                        this.updateMapInfo();
+                    });
+                    
+                    this.map.addEventListener('dragend', () => {
+                        this.log('地图拖拽完成', 'success');
+                        this.updateMapInfo();
+                    });
+                    
+                    this.map.addEventListener('click', (e) => {
+                        this.log(`地图点击: ${e.point.lng.toFixed(6)}, ${e.point.lat.toFixed(6)}`, 'info');
+                    });
+                    
+                    this.updateStatus('已初始化');
+                    this.updateMapInfo();
+                    this.log('地图初始化成功！所有交互功能已启用', 'success');
+                    
+                } catch (error) {
+                    this.log(`地图初始化失败: ${error.message}`, 'error');
+                    this.updateStatus('初始化失败');
+                }
+            }
+            
+            async loadBMapAPI() {
+                return new Promise((resolve, reject) => {
+                    if (window.BMap) {
+                        resolve();
+                        return;
+                    }
+                    
+                    const script = document.createElement('script');
+                    script.src = 'https://api.map.baidu.com/api?v=3.0&ak=PW3sNqgF3kGAIoYMvIGDokcL&callback=__bmap_init_cb';
+                    script.async = true;
+                    
+                    window.__bmap_init_cb = function() {
+                        resolve();
+                        delete window.__bmap_init_cb;
+                    };
+                    
+                    script.onerror = function() {
+                        reject(new Error('百度地图API加载失败'));
+                        delete window.__bmap_init_cb;
+                    };
+                    
+                    document.head.appendChild(script);
+                    this.log('正在加载百度地图API...', 'info');
+                });
+            }
+            
+            testZoom() {
+                if (!this.map) {
+                    this.log('请先初始化地图', 'error');
+                    return;
+                }
+                
+                try {
+                    const currentZoom = this.map.getZoom();
+                    const newZoom = currentZoom === 12 ? 15 : 12;
+                    
+                    this.log(`测试缩放: ${currentZoom} -> ${newZoom}`, 'info');
+                    this.map.setZoom(newZoom);
+                    
+                    setTimeout(() => {
+                        const actualZoom = this.map.getZoom();
+                        if (actualZoom === newZoom) {
+                            this.log(`缩放测试成功！当前级别: ${actualZoom}`, 'success');
+                        } else {
+                            this.log(`缩放测试失败！期望: ${newZoom}, 实际: ${actualZoom}`, 'error');
+                        }
+                    }, 500);
+                    
+                } catch (error) {
+                    this.log(`缩放测试失败: ${error.message}`, 'error');
+                }
+            }
+            
+            testDrag() {
+                if (!this.map) {
+                    this.log('请先初始化地图', 'error');
+                    return;
+                }
+                
+                try {
+                    const currentCenter = this.map.getCenter();
+                    this.log(`当前中心: ${currentCenter.lng.toFixed(6)}, ${currentCenter.lat.toFixed(6)}`, 'info');
+                    
+                    // 模拟拖拽到新位置
+                    const newCenter = new BMap.Point(currentCenter.lng + 0.01, currentCenter.lat + 0.01);
+                    this.map.panTo(newCenter);
+                    
+                    this.log('已发送拖拽指令，请观察地图是否移动', 'info');
+                    
+                } catch (error) {
+                    this.log(`拖拽测试失败: ${error.message}`, 'error');
+                }
+            }
+            
+            addControls() {
+                if (!this.map) {
+                    this.log('请先初始化地图', 'error');
+                    return;
+                }
+                
+                try {
+                    // 添加导航控件（包含缩放按钮）
+                    this.map.addControl(new BMap.NavigationControl());
+                    this.log('已添加导航控件（包含缩放按钮）', 'success');
+                    
+                    // 添加比例尺控件
+                    this.map.addControl(new BMap.ScaleControl());
+                    this.log('已添加比例尺控件', 'success');
+                    
+                    // 添加缩略图控件
+                    this.map.addControl(new BMap.OverviewMapControl());
+                    this.log('已添加缩略图控件', 'success');
+                    
+                } catch (error) {
+                    this.log(`添加控件失败: ${error.message}`, 'error');
+                }
+            }
+            
+            toggleOverlay() {
+                const isVisible = this.overlayEl.style.display !== 'none';
+                this.overlayEl.style.display = isVisible ? 'none' : 'block';
+                this.log(`覆盖层 ${isVisible ? '隐藏' : '显示'} - 测试是否影响地图交互`, 'info');
+            }
+            
+            toggleLoading() {
+                const isLoading = this.containerEl.classList.contains('loading-test');
+                if (isLoading) {
+                    this.containerEl.classList.remove('loading-test');
+                    this.log('加载状态已关闭', 'success');
+                } else {
+                    this.containerEl.classList.add('loading-test');
+                    this.log('加载状态已开启 - 测试pointer-events:none是否影响地图', 'warning');
+                }
+            }
+        }
+        
+        // 初始化测试器
+        window.mapTester = new MapZoomTester();
+        
+        // 页面加载完成后自动初始化地图
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                window.mapTester.log('页面加载完成，可以开始测试地图功能', 'info');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ssssssss.jtt808client.web.mapper.SystemConfigMapper">
+  <resultMap id="BaseResultMap" type="org.ssssssss.jtt808client.web.entity.SystemConfig">
+    <id column="id" property="id" />
+    <result column="cfg_key" property="cfgKey" />
+    <result column="cfg_value" property="cfgValue" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <select id="selectByKey" parameterType="string" resultMap="BaseResultMap">
+    select id, cfg_key, cfg_value, update_time from system_config where cfg_key = #{cfgKey}
+  </select>
+
+  <insert id="upsert">
+    merge into system_config (cfg_key, cfg_value, update_time)
+    key(cfg_key)
+    values(#{cfgKey}, #{cfgValue}, CURRENT_TIMESTAMP)
+  </insert>
+</mapper>

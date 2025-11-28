@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ssssssss.jtt808client.web.mapper.RouteMapper">
+  <resultMap id="BaseResultMap" type="org.ssssssss.jtt808client.web.entity.Route">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="minSpeed" jdbcType="INTEGER" property="minSpeed" />
+    <result column="maxSpeed" jdbcType="INTEGER" property="maxSpeed" />
+    <result column="mileages" jdbcType="INTEGER" property="mileages" />
+    <result column="fingerPrint" jdbcType="VARCHAR" property="fingerPrint" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="startName" jdbcType="VARCHAR" property="startName" />
+    <result column="endName" jdbcType="VARCHAR" property="endName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, minSpeed, maxSpeed, mileages, fingerPrint, type, startName, endName, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="org.ssssssss.jtt808client.web.entity.RouteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from x_route
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from x_route
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from x_route
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.ssssssss.jtt808client.web.entity.RouteExample">
+    delete from x_route
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.ssssssss.jtt808client.web.entity.Route" keyProperty="id" useGeneratedKeys="true">
+    insert into x_route (id, name, minSpeed,
+      maxSpeed, mileages, fingerPrint, type, startName, endName, create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{minSpeed,jdbcType=INTEGER},
+      #{maxSpeed,jdbcType=INTEGER}, #{mileages,jdbcType=INTEGER}, #{fingerPrint,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},
+      #{startName,jdbcType=VARCHAR}, #{endName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ssssssss.jtt808client.web.entity.Route">
+    insert into x_route
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="minSpeed != null">
+        minSpeed,
+      </if>
+      <if test="maxSpeed != null">
+        maxSpeed,
+      </if>
+      <if test="mileages != null">
+        mileages,
+      </if>
+      <if test="fingerPrint != null">
+        fingerPrint,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="startName != null">
+        startName,
+      </if>
+      <if test="endName != null">
+        endName,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="minSpeed != null">
+        #{minSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="maxSpeed != null">
+        #{maxSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="mileages != null">
+        #{mileages,jdbcType=INTEGER},
+      </if>
+      <if test="fingerPrint != null">
+        #{fingerPrint,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="startName != null">
+        #{startName,jdbcType=VARCHAR},
+      </if>
+      <if test="endName != null">
+        #{endName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.ssssssss.jtt808client.web.entity.RouteExample" resultType="java.lang.Long">
+    select count(*) from x_route
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update x_route
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minSpeed != null">
+        minSpeed = #{record.minSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxSpeed != null">
+        maxSpeed = #{record.maxSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="record.mileages != null">
+        mileages = #{record.mileages,jdbcType=INTEGER},
+      </if>
+      <if test="record.fingerPrint != null">
+        fingerPrint = #{record.fingerPrint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startName != null">
+        startName = #{record.startName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endName != null">
+        endName = #{record.endName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update x_route
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      minSpeed = #{record.minSpeed,jdbcType=INTEGER},
+      maxSpeed = #{record.maxSpeed,jdbcType=INTEGER},
+      mileages = #{record.mileages,jdbcType=INTEGER},
+      fingerPrint = #{record.fingerPrint,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      startName = #{record.startName,jdbcType=VARCHAR},
+      endName = #{record.endName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ssssssss.jtt808client.web.entity.Route">
+    update x_route
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="minSpeed != null">
+        minSpeed = #{minSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="maxSpeed != null">
+        maxSpeed = #{maxSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="mileages != null">
+        mileages = #{mileages,jdbcType=INTEGER},
+      </if>
+      <if test="fingerPrint != null">
+        fingerPrint = #{fingerPrint,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="startName != null">
+        startName = #{startName,jdbcType=VARCHAR},
+      </if>
+      <if test="endName != null">
+        endName = #{endName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ssssssss.jtt808client.web.entity.Route">
+    update x_route
+    set name = #{name,jdbcType=VARCHAR},
+      minSpeed = #{minSpeed,jdbcType=INTEGER},
+      maxSpeed = #{maxSpeed,jdbcType=INTEGER},
+      mileages = #{mileages,jdbcType=INTEGER},
+      fingerPrint = #{fingerPrint,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      startName = #{startName,jdbcType=VARCHAR},
+      endName = #{endName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

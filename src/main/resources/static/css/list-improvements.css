@@ -1,0 +1,350 @@
+/**
+ * 列表页面美化样式
+ * 改善表格、搜索、分页等组件的视觉效果
+ */
+
+/* 搜索卡片美化 */
+.search-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border: none !important;
+    color: white !important;
+    margin-bottom: 24px !important;
+}
+
+.search-card .card-header {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.search-card .card-title {
+    color: white !important;
+}
+
+.search-card .form-label {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500 !important;
+}
+
+.search-card .form-control,
+.search-card .form-select {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.search-card .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.search-card .form-control:focus,
+.search-card .form-select:focus {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 表格美化 */
+.table-container {
+    background: white !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.table {
+    margin-bottom: 0 !important;
+}
+
+.table thead th {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+    text-transform: uppercase !important;
+    font-size: 12px !important;
+    letter-spacing: 0.05em !important;
+    padding: 16px !important;
+}
+
+.table tbody td {
+    padding: 16px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    vertical-align: middle !important;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease !important;
+}
+
+.table tbody tr:hover {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 状态徽章美化 */
+.vehicle-status-online {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: white !important;
+    padding: 4px 12px !important;
+    border-radius: 20px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.025em !important;
+    animation: pulse 2s infinite !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.vehicle-status-offline {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+    color: white !important;
+    padding: 4px 12px !important;
+    border-radius: 20px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.025em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* 操作按钮美化 */
+.action-buttons {
+    display: flex !important;
+    gap: 6px !important;
+    align-items: center !important;
+}
+
+.action-buttons .btn {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+    font-weight: 500 !important;
+}
+
+.action-buttons .btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.action-buttons .btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+}
+
+.action-buttons .btn-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+}
+
+.action-buttons .btn-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+}
+
+.action-buttons .btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+}
+
+/* 分页美化 */
+.pagination {
+    justify-content: center !important;
+    margin-top: 32px !important;
+    margin-bottom: 0 !important;
+}
+
+.pagination .page-item {
+    margin: 0 2px !important;
+}
+
+.pagination .page-link {
+    border: 1px solid #e2e8f0 !important;
+    color: #64748b !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+    font-weight: 500 !important;
+    min-width: 40px !important;
+    text-align: center !important;
+}
+
+.pagination .page-link:hover {
+    background: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3) !important;
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    border-color: #3b82f6 !important;
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3) !important;
+}
+
+.pagination .page-item.disabled .page-link {
+    background: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+    color: #cbd5e1 !important;
+}
+
+/* 页面头部美化 */
+.page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    padding: 24px 32px !important;
+    margin: -32px -32px 32px -32px !important;
+    border-radius: 0 0 16px 16px !important;
+}
+
+.page-header .page-title {
+    color: white !important;
+    margin: 0 !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+}
+
+.page-header .page-description {
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin-top: 8px !important;
+    font-size: 16px !important;
+}
+
+/* 统计卡片 */
+.stats-card {
+    background: white !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 24px !important;
+    text-align: center !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.stats-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.stats-card .stats-number {
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin-bottom: 8px !important;
+}
+
+.stats-card .stats-label {
+    color: #64748b !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+.stats-card.primary .stats-number {
+    color: #3b82f6 !important;
+}
+
+.stats-card.success .stats-number {
+    color: #10b981 !important;
+}
+
+.stats-card.warning .stats-number {
+    color: #f59e0b !important;
+}
+
+.stats-card.danger .stats-number {
+    color: #ef4444 !important;
+}
+
+/* 空状态美化 */
+.empty-state {
+    text-align: center !important;
+    padding: 64px 32px !important;
+    color: #64748b !important;
+}
+
+.empty-state .empty-icon {
+    font-size: 64px !important;
+    color: #cbd5e1 !important;
+    margin-bottom: 16px !important;
+}
+
+.empty-state .empty-title {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    margin-bottom: 8px !important;
+}
+
+.empty-state .empty-description {
+    font-size: 16px !important;
+    color: #6b7280 !important;
+    margin-bottom: 24px !important;
+}
+
+/* 加载状态美化 */
+.loading-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10 !important;
+}
+
+.loading-spinner {
+    width: 40px !important;
+    height: 40px !important;
+    border: 3px solid #e2e8f0 !important;
+    border-top: 3px solid #3b82f6 !important;
+    border-radius: 50% !important;
+    animation: spin 1s linear infinite !important;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .table-container {
+        margin: 0 -16px !important;
+        border-radius: 0 !important;
+    }
+    
+    .action-buttons {
+        flex-direction: column !important;
+        gap: 4px !important;
+    }
+    
+    .action-buttons .btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    
+    .page-header {
+        margin: -24px -24px 24px -24px !important;
+        padding: 20px 24px !important;
+    }
+    
+    .stats-card {
+        margin-bottom: 16px !important;
+    }
+}

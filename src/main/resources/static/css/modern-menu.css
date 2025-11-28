@@ -1,0 +1,296 @@
+/**
+ * 现代简洁菜单样式 - 紧凑统一版本
+ * 扁平化设计，简洁清爽，布局紧凑
+ */
+
+/* 侧边栏容器 - 紧凑设计 */
+.sidebar {
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: all 0.2s ease;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .sidebar {
+        background: #1f2937;
+        border-right-color: #374151;
+    }
+}
+
+/* Logo区域 - 紧凑设计 */
+.sidebar .logo {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sidebar .logo {
+        border-bottom-color: #374151;
+    }
+}
+
+.sidebar .logo .logo-icon {
+    width: 28px;
+    height: 28px;
+    background: #3b82f6;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+}
+
+.sidebar .logo .logo-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    letter-spacing: -0.025em;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sidebar .logo .logo-text {
+        color: #f9fafb;
+    }
+}
+
+/* 导航分组标题 - 紧凑设计 */
+.sidebar .nav-section-title {
+    padding: 12px 20px 6px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sidebar .nav-section-title {
+        color: #9ca3af;
+    }
+}
+
+/* 导航链接 - 紧凑扁平化设计 */
+.sidebar .nav-link {
+    color: #4b5563;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    border: none;
+    background: none;
+    font-weight: 500;
+    font-size: 13px;
+    margin: 1px 8px;
+    border-radius: 6px;
+}
+
+.sidebar .nav-link:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.sidebar .nav-link.active {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sidebar .nav-link {
+        color: #d1d5db;
+    }
+    
+    .sidebar .nav-link:hover {
+        background: #374151;
+        color: #f9fafb;
+    }
+    
+    .sidebar .nav-link.active {
+        background: #1e40af;
+        color: #dbeafe;
+    }
+}
+
+/* 导航图标 - 紧凑设计 */
+.sidebar .nav-link i {
+    font-size: 14px;
+    width: 14px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.sidebar .nav-link:hover i,
+.sidebar .nav-link.active i {
+    opacity: 1;
+}
+
+/* 移动端菜单切换按钮 */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #4b5563;
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+
+.mobile-menu-toggle:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+@media (prefers-color-scheme: dark) {
+    .mobile-menu-toggle {
+        color: #d1d5db;
+    }
+    
+    .mobile-menu-toggle:hover {
+        background: #374151;
+        color: #f9fafb;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1001;
+        background: #3b82f6;
+        color: white;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .sidebar {
+        transform: translateX(-100%);
+        width: 260px;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+    }
+}
+
+/* 滚动条样式 - 简洁设计 */
+.sidebar::-webkit-scrollbar {
+    width: 3px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 2px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sidebar::-webkit-scrollbar-thumb {
+        background: #4b5563;
+    }
+    
+    .sidebar::-webkit-scrollbar-thumb:hover {
+        background: #6b7280;
+    }
+}
+
+/* 焦点状态 - 无障碍设计 */
+.sidebar .nav-link:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: -2px;
+}
+
+/* 减少动画（用户偏好） */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar,
+    .sidebar .nav-link,
+    .mobile-menu-toggle {
+        transition: none;
+    }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    .sidebar {
+        border-right-width: 2px;
+    }
+    
+    .sidebar .nav-link {
+        border: 1px solid transparent;
+    }
+    
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+        border-color: currentColor;
+    }
+}
+
+/* 导航分组间距 - 紧凑设计 */
+.sidebar .nav-section + .nav-section {
+    margin-top: 16px;
+}
+
+/* 简洁的分隔线 */
+.sidebar .nav-divider {
+    height: 1px;
+    background: #e5e7eb;
+    margin: 12px 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sidebar .nav-divider {
+        background: #374151;
+    }
+}
+
+/* 确保主内容区域适配紧凑菜单 */
+.main-content {
+    margin-left: 260px;
+    transition: margin-left 0.2s ease;
+}
+
+/* 菜单项计数器/徽章 */
+.sidebar .nav-link .badge {
+    background: #e5e7eb;
+    color: #6b7280;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.sidebar .nav-link:hover .badge,
+.sidebar .nav-link.active .badge {
+    background: #3b82f6;
+    color: white;
+}

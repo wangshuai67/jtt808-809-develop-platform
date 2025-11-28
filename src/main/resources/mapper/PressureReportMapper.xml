@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ssssssss.jtt808client.web.mapper.PressureReportMapper">
+  <resultMap id="BaseResultMap" type="org.ssssssss.jtt808client.web.entity.PressureReport">
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="start_time" property="startTime" />
+    <result column="end_time" property="endTime" />
+    <result column="created_count" property="createdCount" />
+    <result column="skipped_count" property="skippedCount" />
+    <result column="task_count" property="taskCount" />
+    <result column="server_address" property="serverAddress" />
+    <result column="server_port" property="serverPort" />
+    <result column="route_mode" property="routeMode" />
+    <result column="route_ids" property="routeIds" />
+    <result column="task_ids" property="taskIds" />
+    <result column="status" property="status" />
+  </resultMap>
+
+  <insert id="insert" parameterType="org.ssssssss.jtt808client.web.entity.PressureReport" useGeneratedKeys="true" keyProperty="id">
+    insert into pressure_report(name,start_time,end_time,created_count,skipped_count,task_count,server_address,server_port,route_mode,route_ids,task_ids,status)
+    values(#{name},#{startTime},#{endTime},#{createdCount},#{skippedCount},#{taskCount},#{serverAddress},#{serverPort},#{routeMode},#{routeIds},#{taskIds},#{status})
+  </insert>
+
+  <update id="update" parameterType="org.ssssssss.jtt808client.web.entity.PressureReport">
+    update pressure_report set
+    name=#{name}, start_time=#{startTime}, end_time=#{endTime}, created_count=#{createdCount}, skipped_count=#{skippedCount}, task_count=#{taskCount},
+    server_address=#{serverAddress}, server_port=#{serverPort}, route_mode=#{routeMode}, route_ids=#{routeIds}, task_ids=#{taskIds}, status=#{status}
+    where id=#{id}
+  </update>
+
+  <select id="selectById" parameterType="long" resultMap="BaseResultMap">
+    select * from pressure_report where id=#{id}
+  </select>
+
+  <select id="list" resultMap="BaseResultMap">
+    select * from pressure_report order by id desc
+  </select>
+</mapper>
