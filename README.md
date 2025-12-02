@@ -225,7 +225,7 @@ SIM卡号：13800138000
     <td align="center">
       <strong>7. 压测界面</strong><br>
       <img src="./img/7.png" width="300px"><br>
-  
+      压测页面
     </td>
     <td align="center">
       <strong>8. 日志查看界面</strong><br>
