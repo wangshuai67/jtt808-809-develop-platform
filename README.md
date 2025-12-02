@@ -277,5 +277,6 @@ SIM卡号：13800138000
 </table>
 
 ## 参考项目
+感谢下面两位大佬的开源项目
 - https://github.com/SmallChi/JT809
 - https://github.com/glaciall/jtt808-simulator
