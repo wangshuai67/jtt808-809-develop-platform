@@ -223,9 +223,9 @@ SIM卡号：13800138000
       网关管理
     </td>
     <td align="center">
-      <strong>7. 设备管理界面</strong><br>
+      <strong>7. 压测界面</strong><br>
       <img src="./img/7.png" width="300px"><br>
-      设备管理
+  
     </td>
     <td align="center">
       <strong>8. 日志查看界面</strong><br>
